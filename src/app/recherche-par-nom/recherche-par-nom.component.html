@@ -1,0 +1,65 @@
+<div class="container">
+
+    <!-- <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+            <label>Rechercher les Noms du Produit en "pipe"</label>
+            <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control">
+        </div>
+    </form> -->
+
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+            <label>Nom Produit en tapant par eventkey du champs de saisie</label>
+            <input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
+        </div>
+
+        <form class="form-inline">
+            <div class="form-group mx-sm-3 mb-2 mt-2 ">
+                <label>Nom Produit avec une API </label>
+                <input type="text" class="form-control" [(ngModel)]="nomProduit" name="nomProduit" class="form-control">
+                <button type="submit" (click)="rechercherProds()" class="btn btn-primary mb-2 ml-2">Rechercher</button>
+            </div>
+        </form>
+
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Date Création</th>
+                        <th>Noms Catégorie</th>
+                        <th>Description Catégorie</th>
+                    </tr>
+                    @for (produit of produits  ; track produit.idProduit)
+                    {
+                    <tbody>
+                        <tr>
+                            <td>{{produit.idProduit}}</td>
+                            <td>{{produit.nomProduit}}</td>
+                            <td>{{produit.prixProduit}}</td>
+                            <td>{{produit.dateCreation | date:'dd/MM/yyyy'}}</td>
+                            @if(produit.categorie){
+                            <td>{{produit.categorie.nomCat}}</td> 
+                            <td>{{produit.categorie.descriptionCat}}</td>
+                        }
+                            
+                            
+                            @else {
+                            <td>PAS DE CATEGORIE</td>
+                            }
+                            <!--
+            <td><a class="btn btn-danger"
+            (click)="supprimerProduit(produit)">Supprimer</a></td>
+            <td><a class="btn btn-success"
+            [routerLink]="['/updateProduit',produit.idProduit]">Modifier</a></td> -->
+                        </tr>
+                    </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+        </form>
+        </div>
+        
